@@ -9,3 +9,40 @@
 //    <div class="tab">topic here</div>
 //
 // NOTE: you do _not_ need to install axios as it's included in the HTML via script element
+
+const entryPointTabs = document.querySelector('.topics')
+
+
+function Tabtastic(data){
+    const tab = document.createElement('div')
+    tab.className = 'tab'
+    
+    data.forEach(top => {
+        debugger
+        entryPointTabs.appendChild(tab)
+        tab.textContent = top
+        return tab
+    })
+
+    tab.className = 'tab'
+    return tab
+}
+
+function getTopics(){
+    const gotTopics = 'https://lambda-times-backend.herokuapp.com/topics'
+
+    axios.get(gotTopics)
+    .then(function (value) {
+        const gotTopicsAxios = value.data.topics
+        console.log(gotTopicsAxios)
+        Tabtastic(gotTopicsAxios)
+        console.log('success')
+        })
+    .catch(function (error) {
+        debugger
+        console.log('ERROR')
+    })
+}
+
+getTopics()
+
